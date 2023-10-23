@@ -15,3 +15,82 @@
         </script>
     </body>
 </html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                red,
+                yellow,
+                green,
+                blue,
+                purple,
+                cyan,
+                magenta,
+                #f39c12,
+                #d35400,
+                #e74c3c,
+                #8e44ad,
+                #2c3e50,
+                #1abc9c,
+                #3498db,
+                #16a085,
+                #27ae60,
+                #f1c40f,
+                #d35400,
+                #e74c3c,
+                #8e44ad,
+                #2c3e50,
+                #ff5252,
+                #2ecc71,
+                #ffeb3b,
+                #34495e,
+                #e67e22,
+                to 360deg
+            );
+            animation: spin 10s linear forwards;
+        }
+
+        .wheel-pin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            border-radius: 50%;
+            left: calc(50% - 10px);
+            top: 10px;
+        }
+
+        .animation-graphic {
+            display: none;
+            text-align: center;
+        }
+
+        .animation-graphic img {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wheel-container">
+        <div class="wheel-pin"></div>
+    </div>
+
+    <button id="spinButton" style="background-color: pink;">GSE Wheel of Pain</button>
+
+    <div class="animation-graphic" id="animationGraphic">
+        <img src="fun_animation.gif" alt="Fun Animation">
+    </div>
+
+
+</body>
+</html>
