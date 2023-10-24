@@ -6,13 +6,8 @@
             position: relative;
             width: 300px;
             height: 300px;
-            background-color: #FFFDE7;
             border-radius: 50%;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 5px solid #3498db;
         }
 
         .wheel {
@@ -44,6 +39,20 @@
             }
         }
 
+        .choice {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            clip-path: polygon(50% 50%, 0 0, 100% 0);
+            background-color: #f39c12;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            transform: rotate(0deg);
+        }
+
         #result {
             font-size: 20px;
             margin-top: 20px;
@@ -54,6 +63,26 @@
     <div class="wheel-container">
         <div class="wheel"></div>
         <div class="arrow"></div>
+        <div class="choice" style="transform: rotate(0deg);">1</div>
+        <div class="choice" style="transform: rotate(18deg);">2</div>
+        <div class="choice" style="transform: rotate(36deg);">3</div>
+        <div class="choice" style="transform: rotate(54deg);">4</div>
+        <div class="choice" style="transform: rotate(72deg);">5</div>
+        <div class="choice" style="transform: rotate(90deg);">6</div>
+        <div class="choice" style="transform: rotate(108deg);">7</div>
+        <div class="choice" style="transform: rotate(126deg);">8</div>
+        <div class="choice" style="transform: rotate(144deg);">9</div>
+        <div class="choice" style="transform: rotate(162deg);">10</div>
+        <div class="choice" style="transform: rotate(180deg);">11</div>
+        <div class="choice" style="transform: rotate(198deg);">12</div>
+        <div class "choice" style="transform: rotate(216deg);">13</div>
+        <div class="choice" style="transform: rotate(234deg);">14</div>
+        <div class="choice" style="transform: rotate(252deg);">15</div>
+        <div class="choice" style="transform: rotate(270deg);">16</div>
+        <div class="choice" style="transform: rotate(288deg);">17</div>
+        <div class="choice" style="transform: rotate(306deg);">18</div>
+        <div class="choice" style="transform: rotate(324deg);">19</div>
+        <div class="choice" style="transform: rotate(342deg);">20</div>
     </div>
 
     <button id="spinButton" style="background-color: #3498db; color: white;">Spin the Wheel</button>
@@ -80,7 +109,7 @@
 
             // Show the result after 5 seconds (same duration as the wheel spin)
             setTimeout(() => {
-                result.textContent = `You landed on choice ${randomChoice}`;
+                result.textContent = `Selected Choice: ${randomChoice}`;
                 spinButton.disabled = false; // Re-enable the button
             }, 5000);
         });
