@@ -64,44 +64,14 @@
         <button id="spinButton">Spin Now</button>
         <div id="arrow"></div>
     </div>
- 
+
     <script>
         const canvas = document.getElementById('canvas');
         const result = document.getElementById('result');
         const spinButton = document.getElementById('spinButton');
         const arrow = document.getElementById('arrow');
 
-        const numChoices = 20;
-        const babyNames = [
-            { label: 'Vandy', color: 'transparent', border: '#000', fontSize: 35  },
-            { label: 'Manifest Change', color: 'transparent', border: '#000', fontSize: 30 },
-            { label: 'Last minute NDE finding', color: 'transparent', border: '#000', fontSize: 27 },
-            { label: 'Someone capped a reliving relief', color: 'transparent', border: '#000', fontSize: 11 },
-            { label: 'Surprise Hurricane', color: 'transparent', border: '#000', fontSize: 15 },
-            { label: 'Dropped another roll ring', color: 'transparent', border: '#000', fontSize: 10 },
-            { label: 'Compression Washers', color: 'transparent', border: '#000', fontSize: 17 },
-            { label: 'SFM saw you', color: 'transparent', border: '#000', fontSize: 21 },
-            { label: 'Increase in our teams scope', color: 'transparent', border: '#000', fontSize: 10 },
-            { label: 'How fast can you activate that GSE', color: 'transparent', border: '#000', fontSize: 7 },
-            { label: 'Dessicants', color: 'transparent', border: '#000', fontSize: 25 },
-            { label: 'Falcon Heavy exists', color: 'transparent', border: '#000', fontSize: 17 },
-            { label: 'Aluminum weld crack', color: 'transparent', border: '#000', fontSize: 17 },
-            { label: 'Techs didnt put it back', color: 'transparent', border: '#000', fontSize: 14 },
-            { label: 'Forgot until its HOT', color: 'transparent', border: '#000', fontSize: 16 },
-            { label: 'Stinger wont sting', color: 'transparent', border: '#000', fontSize: 17 },
-            { label: 'Using crans like a claw machine again', color: 'transparent', border: '#000', fontSize: 7 },
-            { label: 'It droped', color: 'transparent', border: '#000', fontSize: 28 },
-            { label: 'If it can be hit by a fork lift it will', color: 'transparent', border: '#000', fontSize: 7 },
-            { label: 'But its only GSE', color: 'transparent', border: '#000', fontSize: 11}
-        ];
-
-        const sliceDeg = 360 / numChoices;
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const ctx = canvas.getContext("2d");
-        ctx.lineWidth = 2;
+        // ... Your existing JavaScript code ...
 
         const drawSlice = (deg, choice) => {
             ctx.beginPath();
@@ -115,22 +85,21 @@
             );
             ctx.lineTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.fill();
-            ctx.strokeStyle = choice.border; // Set the border color
-            ctx.stroke(); // Draw the border
+            ctx.strokeStyle = choice.border;
+            ctx.stroke();
 
             ctx.save();
             ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
             ctx.rotate(deg * Math.PI / 180);
             ctx.fillStyle = "white";
-            const fontSize = 16; // Fixed font size
+            const fontSize = 16;
             const fontFamily = "Arial, Impact, Tahoma, Comic Sans MS, Verdana, Georgia, Courier New";
             ctx.font = `${fontSize}px ${fontFamily}`;
             ctx.textAlign = "center";
-            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
-            const y = -Math.cos(sliceDeg * Math.PI / 360) * radius + 10; // Adjusted vertical position
-            ctx.translate(0, y);
-            ctx.rotate(-Math.PI / 2); // Rotate text to make it vertical
-            ctx.fillText(choice.label, 0, 0);
+
+            const textX = 0;
+            const textY = Math.min(window.innerWidth, window.innerHeight) * 0.32;
+            ctx.fillText(choice.label, textX, textY);
             ctx.restore();
         };
 
