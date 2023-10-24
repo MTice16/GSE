@@ -65,23 +65,10 @@
         const spinButton = document.getElementById('spinButton');
         const arrow = document.getElementById('arrow');
 
-        const numChoices = 15;
-        const phoneticAlphabet = [
-            { label: 'Alpha', font: '24px Arial' },
-            { label: 'Bravo', font: '24px Arial' },
-            { label: 'Charlie', font: '24px Arial' },
-            { label: 'Delta', font: '24px Arial' },
-            { label: 'Echo', font: '24px Arial' },
-            { label: 'Foxtrot', font: '24px Arial' },
-            { label: 'Golf', font: '24px Arial' },
-            { label: 'Hotel', font: '24px Arial' },
-            { label: 'India', font: '24px Arial' },
-            { label: 'Juliett', font: '24px Arial' },
-            { label: 'Kilo', font: '24px Arial' },
-            { label: 'Lima', font: '24px Arial' },
-            { label: 'Mike', font: '24px Arial' },
-            { label: 'November', font: '24px Arial' },
-            { label: 'Oscar', font: '24px Arial' }
+        const numChoices = 14; // Reduced to 14 choices
+        const choices = [
+            "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf",
+            "Hotel", "India", "Juliett", "Kilo", "Lima", "Mike", "November"
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -93,9 +80,7 @@
         ctx.strokeStyle = "#000";
         ctx.lineWidth = 2;
 
-        const drawSlice = (deg, labelObj, color) => {
-            const { label, font } = labelObj;
-
+        const drawSlice = (deg, label, color) => {
             ctx.beginPath();
             ctx.fillStyle = color;
             ctx.moveTo(window.innerWidth / 2, window.innerHeight / 2);
@@ -112,7 +97,7 @@
             ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
             ctx.rotate((deg + sliceDeg / 2) * Math.PI / 180);
             ctx.fillStyle = "white";
-            ctx.font = font;
+            ctx.font = 'bold 24px Arial';
             ctx.textAlign = "center";
             const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35; // Inside the outer edge
             const x = Math.sin((deg + sliceDeg / 2) * Math.PI / 180) * radius;
@@ -129,7 +114,7 @@
         ];
 
         for (let i = 0; i < numChoices; i++) {
-            drawSlice(i * sliceDeg, phoneticAlphabet[i], colors[i]);
+            drawSlice(i * sliceDeg, choices[i], colors[i]);
         }
 
         let currentChoice = null;
@@ -138,9 +123,9 @@
             // Disable the button during the animation
             spinButton.disabled = true;
 
-            // Generate a random choice (Alpha to Oscar)
+            // Generate a random choice
             const randomIndex = Math.floor(Math.random() * numChoices);
-            const selectedChoice = phoneticAlphabet[randomIndex];
+            const selectedChoice = choices[randomIndex];
 
             // Calculate the rotation angle for the wheel
             const rotationAngle = (numChoices - randomIndex) * sliceDeg + 180;
@@ -153,10 +138,10 @@
             // Show the result after 5 seconds (same duration as the wheel spin)
             setTimeout(() => {
                 if (currentChoice) {
-                    result.textContent = `You selected: ${currentChoice.label}`;
+                    result.textContent = `You selected: ${currentChoice}`;
                 }
                 currentChoice = selectedChoice;
-                result.textContent = `You landed on: ${currentChoice.label}`;
+                result.textContent = `You landed on: ${currentChoice}`;
                 spinButton.disabled = false; // Re-enable the button
                 arrow.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotationAngle + 90}deg)`;
             }, 5000);
