@@ -112,7 +112,7 @@
             ctx.fillStyle = "white";
             ctx.font = "16px Arial";
             ctx.textAlign = "center";
-            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.38; // Slightly inside the outer edge
+            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35; // Inside the outer edge
             const x = Math.sin((deg + sliceDeg / 2) * Math.PI / 180) * radius;
             const y = -Math.cos((deg + sliceDeg / 2) * Math.PI / 180) * radius;
             ctx.translate(x, y);
