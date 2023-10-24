@@ -13,7 +13,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: auto;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -64,8 +64,14 @@
         const spinButton = document.getElementById('spinButton');
         const arrowSize = 30; // Arrow size
 
-        const numChoices = 20;
-        const choices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
+        const numChoices = 26;
+        const phoneticAlphabet = [
+            'Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot',
+            'Golf', 'Hotel', 'India', 'Juliett', 'Kilo', 'Lima',
+            'Mike', 'November', 'Oscar', 'Papa', 'Quebec', 'Romeo',
+            'Sierra', 'Tango', 'Uniform', 'Victor', 'Whiskey', 'X-ray', 'Yankee', 'Zulu'
+        ];
+
         const sliceDeg = 360 / numChoices;
 
         canvas.width = window.innerWidth;
@@ -93,12 +99,14 @@
             ctx.rotate((deg + sliceDeg / 2) * Math.PI / 180);
             ctx.fillStyle = "white";
             ctx.font = "16px Arial";
-            ctx.fillText(label, Math.min(window.innerWidth, window.innerHeight) * 0.35, -8);
+            ctx.textAlign = "center";
+            ctx.translate(0, -40); // Move text up
+            ctx.fillText(label, 0, 0);
             ctx.restore();
         };
 
         for (let i = 0; i < numChoices; i++) {
-            drawSlice(i * sliceDeg, choices[i]);
+            drawSlice(i * sliceDeg, phoneticAlphabet[i]);
         }
 
         let currentChoice = null;
@@ -107,9 +115,9 @@
             // Disable the button during the animation
             spinButton.disabled = true;
 
-            // Generate a random choice (A to T)
+            // Generate a random choice (Alpha to Zulu)
             const randomIndex = Math.floor(Math.random() * numChoices);
-            const selectedChoice = choices[randomIndex];
+            const selectedChoice = phoneticAlphabet[randomIndex];
 
             // Calculate the rotation angle for the wheel
             const rotationAngle = (numChoices - randomIndex) * sliceDeg + 180;
