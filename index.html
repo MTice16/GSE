@@ -48,6 +48,18 @@
             font-size: 18px;
             cursor: pointer;
         }
+
+        #arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid red;
+            transform: translateX(-50%) translateY(-100%) rotate(90deg);
+        }
     </style>
 </head>
 <body>
@@ -57,12 +69,13 @@
 
     <div id="result"></div>
     <button id="spinButton">Spin the Wheel</button>
+    <div id="arrow"></div>
 
     <script>
         const canvas = document.getElementById('canvas');
         const result = document.getElementById('result');
         const spinButton = document.getElementById('spinButton');
-        const arrowSize = 30; // Arrow size
+        const arrow = document.getElementById('arrow');
 
         const numChoices = 26;
         const phoneticAlphabet = [
@@ -135,6 +148,7 @@
                 currentChoice = selectedChoice;
                 result.textContent = `You landed on: ${currentChoice}`;
                 spinButton.disabled = false; // Re-enable the button
+                arrow.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotationAngle + 90}deg)`;
             }, 5000);
         });
     </script>
