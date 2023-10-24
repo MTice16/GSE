@@ -66,33 +66,33 @@
         const arrow = document.getElementById('arrow');
 
         const numChoices = 26;
-        const choices = [
-            { label: 'A', color: '#f39c12' },
-            { label: 'B', color: '#e74c3c' },
-            { label: 'C', color: '#27ae60' },
-            { label: 'D', color: '#3498db' },
-            { label: 'E', color: '#9b59b6' },
-            { label: 'F', color: '#34495e' },
-            { label: 'G', color: '#e67e22' },
-            { label: 'H', color: '#d35400' },
-            { label: 'I', color: '#2c3e50' },
-            { label: 'J', color: '#8e44ad' },
-            { label: 'K', color: '#1abc9c' },
-            { label: 'L', color: '#16a085' },
-            { label: 'M', color: '#f1c40f' },
-            { label: 'N', color: '#2ecc71' },
-            { label: 'O', color: '#e74c3c' },
-            { label: 'P', color: '#27ae60' },
-            { label: 'Q', color: '#3498db' },
-            { label: 'R', color: '#9b59b6' },
-            { label: 'S', color: '#34495e' },
-            { label: 'T', color: '#e67e22' },
-            { label: 'U', color: '#d35400' },
-            { label: 'V', color: '#2c3e50' },
-            { label: 'W', color: '#8e44ad' },
-            { label: 'X', color: '#1abc9c' },
-            { label: 'Y', color: '#16a085' },
-            { label: 'Z', color: '#f1c40f' }
+        const phoneticAlphabet = [
+            { label: 'Alpha', color: '#f39c12' },
+            { label: 'Bravo', color: '#e74c3c' },
+            { label: 'Charlie', color: '#27ae60' },
+            { label: 'Delta', color: '#3498db' },
+            { label: 'Echo', color: '#9b59b6' },
+            { label: 'Foxtrot', color: '#34495e' },
+            { label: 'Golf', color: '#e67e22' },
+            { label: 'Hotel', color: '#d35400' },
+            { label: 'India', color: '#2c3e50' },
+            { label: 'Juliett', color: '#8e44ad' },
+            { label: 'Kilo', color: '#1abc9c' },
+            { label: 'Lima', color: '#16a085' },
+            { label: 'Mike', color: '#f1c40f' },
+            { label: 'November', color: '#2ecc71' },
+            { label: 'Oscar', color: '#f39c12' },
+            { label: 'Papa', color: '#e74c3c' },
+            { label: 'Quebec', color: '#27ae60' },
+            { label: 'Romeo', color: '#3498db' },
+            { label: 'Sierra', color: '#9b59b6' },
+            { label: 'Tango', color: '#34495e' },
+            { label: 'Uniform', color: '#e67e22' },
+            { label: 'Victor', color: '#d35400' },
+            { label: 'Whiskey', color: '#2c3e50' },
+            { label: 'X-ray', color: '#8e44ad' },
+            { label: 'Yankee', color: '#1abc9c' },
+            { label: 'Zulu', color: '#16a085' },
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -117,29 +117,25 @@
             ctx.lineTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.fill();
             ctx.stroke();
-            
+
             ctx.save();
             ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
             ctx.rotate(deg * Math.PI / 180);
             ctx.fillStyle = "white";
-            
+
             const fontSize = Math.floor(Math.random() * 6) + 15; // Random font size between 15 and 20
             const fontFamily = "Arial, Impact, Tahoma, Comic Sans MS, Verdana, Georgia, Courier New";
-            
+
             ctx.font = `${fontSize}px ${fontFamily}`;
             ctx.textAlign = "center";
             const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
             const y = -Math.cos(sliceDeg * Math.PI / 360) * radius;
-            ctx.save();
-            ctx.translate(0, y);
-            ctx.rotate((90) * Math.PI / 180);
-            ctx.fillText(choice.label, 0, 0);
-            ctx.restore();
+            ctx.fillText(choice.label, 0, y);
             ctx.restore();
         };
 
         for (let i = 0; i < numChoices; i++) {
-            drawSlice(i * sliceDeg, choices[i]);
+            drawSlice(i * sliceDeg, phoneticAlphabet[i]);
         }
 
         let currentChoice = null;
@@ -150,7 +146,7 @@
 
             // Generate a random choice
             const randomIndex = Math.floor(Math.random() * numChoices);
-            const selectedChoice = choices[randomIndex];
+            const selectedChoice = phoneticAlphabet[randomIndex];
 
             // Calculate the rotation angle for the wheel
             const rotationAngle = (numChoices - randomIndex) * sliceDeg + 180;
