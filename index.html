@@ -118,7 +118,11 @@
             ctx.textAlign = "center";
             const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
             const y = -Math.cos(sliceDeg * Math.PI / 360) * radius;
-            ctx.fillText(choice.label, 0, y);
+            ctx.save();
+            ctx.translate(0, y);
+            ctx.rotate((90) * Math.PI / 180);
+            ctx.fillText(choice.label, 0, 0);
+            ctx.restore();
             ctx.restore();
         };
 
