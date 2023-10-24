@@ -116,7 +116,7 @@
             ctx.textAlign = "center";
             const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35; // Inside the outer edge
             const x = Math.sin((deg + sliceDeg / 2) * Math.PI / 180) * radius;
-            const y = -Math.cos((deg + sliceDeg / 2) * Math.PI / 180) * radius;
+            const y = -Math.cos((deg + sliceDeg / 2) * Math.PI / 180) * radius - 15; // Adjusted to ensure visibility
             ctx.translate(x, y);
             ctx.fillText(label, 0, 0);
             ctx.restore();
