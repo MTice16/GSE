@@ -64,20 +64,28 @@
         const spinButton = document.getElementById('spinButton');
         const arrow = document.getElementById('arrow');
 
-        const numChoices = 12;
-        const seasons = [
-            { label: 'Winter', emoji: '❄️', color: '#3498db' },
-            { label: 'Spring', emoji: '🌷', color: '#27ae60' },
-            { label: 'Summer', emoji: '☀️', color: '#e67e22' },
-            { label: 'Autumn', emoji: '🍁', color: '#d35400' },
-            { label: 'Winter', emoji: '❄️', color: '#3498db' },
-            { label: 'Spring', emoji: '🌷', color: '#27ae60' },
-            { label: 'Summer', emoji: '☀️', color: '#e67e22' },
-            { label: 'Autumn', emoji: '🍁', color: '#d35400' },
-            { label: 'Winter', emoji: '❄️', color: '#3498db' },
-            { label: 'Spring', emoji: '🌷', color: '#27ae60' },
-            { label: 'Summer', emoji: '☀️', color: '#e67e22' },
-            { label: 'Autumn', emoji: '🍁', color: '#d35400' },
+        const numChoices = 20;
+        const babyNames = [
+            { label: 'Aiden' },
+            { label: 'Olivia' },
+            { label: 'Liam' },
+            { label: 'Emma' },
+            { label: 'Noah' },
+            { label: 'Isabella' },
+            { label: 'Sophia' },
+            { label: 'Mia' },
+            { label: 'Charlotte' },
+            { label: 'Amelia' },
+            { label: 'Harper' },
+            { label: 'Evelyn' },
+            { label: 'Abigail' },
+            { label: 'Emily' },
+            { label: 'Elizabeth' },
+            { label: 'Mila' },
+            { label: 'Ella' },
+            { label: 'Avery' },
+            { label: 'Sofia' },
+            { label: 'Aria' }
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -91,7 +99,7 @@
 
         const drawSlice = (deg, choice) => {
             ctx.beginPath();
-            ctx.fillStyle = choice.color;
+            ctx.fillStyle = "#3498db";
             ctx.moveTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.arc(
                 window.innerWidth / 2, window.innerHeight / 2,
@@ -114,12 +122,12 @@
             const y = -Math.cos(sliceDeg * Math.PI / 360) * radius;
             ctx.translate(0, y);
             ctx.rotate(-Math.PI / 2); // Rotate text to make it vertical
-            ctx.fillText(choice.label + " " + choice.emoji, 0, 0);
+            ctx.fillText(choice.label, 0, 0);
             ctx.restore();
         };
 
         for (let i = 0; i < numChoices; i++) {
-            drawSlice(i * sliceDeg, seasons[i]);
+            drawSlice(i * sliceDeg, babyNames[i]);
         }
 
         let currentChoice = null;
@@ -130,7 +138,7 @@
 
             // Generate a random choice
             const randomIndex = Math.floor(Math.random() * numChoices);
-            const selectedChoice = seasons[randomIndex];
+            const selectedChoice = babyNames[randomIndex];
 
             // Calculate the rotation angle for the wheel
             const rotationAngle = (numChoices - randomIndex) * sliceDeg + 180;
