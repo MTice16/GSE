@@ -77,12 +77,11 @@
         const spinButton = document.getElementById('spinButton');
         const arrow = document.getElementById('arrow');
 
-        const numChoices = 26;
+        const numChoices = 15;
         const phoneticAlphabet = [
             'Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot',
             'Golf', 'Hotel', 'India', 'Juliett', 'Kilo', 'Lima',
-            'Mike', 'November', 'Oscar', 'Papa', 'Quebec', 'Romeo',
-            'Sierra', 'Tango', 'Uniform', 'Victor', 'Whiskey', 'X-ray', 'Yankee', 'Zulu'
+            'Mike', 'November', 'Oscar'
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -124,8 +123,7 @@
         const colors = [
             "#f39c12", "#e74c3c", "#27ae60", "#3498db", "#9b59b6", "#34495e",
             "#e67e22", "#d35400", "#2c3e50", "#8e44ad", "#1abc9c", "#16a085",
-            "#f1c40f", "#e67e22", "#2ecc71", "#27ae60", "#3498db", "#2980b9",
-            "#c0392b", "#8e44ad", "#d35400", "#f39c12", "#e74c3c", "#9b59b6", "#16a085"
+            "#f1c40f", "#e67e22", "#2ecc71"
         ];
 
         for (let i = 0; i < numChoices; i++) {
@@ -138,7 +136,7 @@
             // Disable the button during the animation
             spinButton.disabled = true;
 
-            // Generate a random choice (Alpha to Zulu)
+            // Generate a random choice (Alpha to Oscar)
             const randomIndex = Math.floor(Math.random() * numChoices);
             const selectedChoice = phoneticAlphabet[randomIndex];
 
