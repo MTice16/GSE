@@ -67,21 +67,21 @@
 
         const numChoices = 15;
         const phoneticAlphabet = [
-            { label: 'Alphfgha', font: '30px Arial' },
-            { label: 'Bravo', font: 'italic bold 24px Arial' },
-            { label: 'Charlie', font: 'italic 28px Arial' },
-            { label: 'Delta', font: 'bold 26px Arial' },
-            { label: 'Echo', font: 'italic 30px Arial' },
+            { label: 'Alpha', font: '28px Arial' },
+            { label: 'Bravo', font: '28px Arial' },
+            { label: 'Charlie', font: '28px Arial' },
+            { label: 'Delta', font: '28px Arial' },
+            { label: 'Echo', font: '28px Arial' },
             { label: 'Foxtrot', font: '28px Arial' },
-            { label: 'Golf', font: '30px Arial' },
-            { label: 'Hotel', font: 'italic bold 26px Arial' },
-            { label: 'India', font: 'bold 30px Arial' },
-            { label: 'Juliett', font: 'italic 28px Arial' },
+            { label: 'Golf', font: '28px Arial' },
+            { label: 'Hotel', font: '28px Arial' },
+            { label: 'India', font: '28px Arial' },
+            { label: 'Juliett', font: '28px Arial' },
             { label: 'Kilo', font: '28px Arial' },
-            { label: 'Lima', font: 'bold 26px Arial' },
-            { label: 'Mike', font: 'italic bold 28px Arial' },
+            { label: 'Lima', font: '28px Arial' },
+            { label: 'Mike', font: '28px Arial' },
             { label: 'November', font: '28px Arial' },
-            { label: 'Oscar', font: '30px Arial' }
+            { label: 'Oscar', font: '28px Arial' }
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -114,9 +114,9 @@
             ctx.fillStyle = "white";
             ctx.font = font;
             ctx.textAlign = "center";
-            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35; // Inside the outer edge
+            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.3; // Inside the outer edge
             const x = Math.sin((deg + sliceDeg / 2) * Math.PI / 180) * radius;
-            const y = -Math.cos((deg + sliceDeg / 2) * Math.PI / 180) * radius - 15; // Adjusted to ensure visibility
+            const y = -Math.cos((deg + sliceDeg / 2) * Math.PI / 180) * radius;
             ctx.translate(x, y);
             ctx.fillText(label, 0, 0);
             ctx.restore();
