@@ -42,16 +42,16 @@
             transform: translateX(-50%);
             background-color: #3498db;
             color: white;
-            border: black;
+            border: none;
             padding: 10px 20px;
-            border-radius: 7px;
+            border-radius: 5px;
             font-size: 18px;
             cursor: pointer;
         }
 
         #arrow {
             position: absolute;
-            top: 25%;
+            top: 50%;
             left: 50%;
             width: 0;
             height: 0;
@@ -68,7 +68,7 @@
     </div>
 
     <div id="result"></div>
-    <button id="spinButton">Spin me Daddy</button>
+    <button id="spinButton">Spin the Wheel</button>
     <div id="arrow"></div>
 
     <script>
@@ -112,10 +112,10 @@
             ctx.fillStyle = "white";
             ctx.font = "16px Arial";
             ctx.textAlign = "center";
-            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.4;
+            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.38; // Slightly inside the outer edge
             const x = Math.sin((deg + sliceDeg / 2) * Math.PI / 180) * radius;
             const y = -Math.cos((deg + sliceDeg / 2) * Math.PI / 180) * radius;
-            ctx.translate(x, y); // Move text towards the outer edge
+            ctx.translate(x, y);
             ctx.fillText(label, 0, 0);
             ctx.restore();
         };
