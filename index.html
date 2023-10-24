@@ -48,8 +48,6 @@
             font-size: 18px;
             cursor: pointer;
         }
-
-
     </style>
 </head>
 <body>
@@ -69,9 +67,21 @@
 
         const numChoices = 15;
         const phoneticAlphabet = [
-            'Alpfghjkjhgfha', 'Bkjhgfghjkravo', 'Charjhgfghjuklie', 'ytyuiuygtfdfghj', 'Ecuytrertyuiho', 'Foxtiuytrerftyujkrot',
-            'Gkjhgfgholf', 'Hoktrftyuitel', 'Inkjhgfghjdia', 'Juliuyttyuett', 'Kkjhgfghjkilo', 'Limjgfdfgha',
-            'Miuytyuike', 'Novkiuytrtyuember', 'Oscjredrtyuiar'
+            { label: 'Alphfgha', font: '30px Arial' },
+            { label: 'Bravo', font: 'italic bold 24px Arial' },
+            { label: 'Charlie', font: 'italic 28px Arial' },
+            { label: 'Delta', font: 'bold 26px Arial' },
+            { label: 'Echo', font: 'italic 30px Arial' },
+            { label: 'Foxtrot', font: '28px Arial' },
+            { label: 'Golf', font: '30px Arial' },
+            { label: 'Hotel', font: 'italic bold 26px Arial' },
+            { label: 'India', font: 'bold 30px Arial' },
+            { label: 'Juliett', font: 'italic 28px Arial' },
+            { label: 'Kilo', font: '28px Arial' },
+            { label: 'Lima', font: 'bold 26px Arial' },
+            { label: 'Mike', font: 'italic bold 28px Arial' },
+            { label: 'November', font: '28px Arial' },
+            { label: 'Oscar', font: '30px Arial' }
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -83,7 +93,9 @@
         ctx.strokeStyle = "#000";
         ctx.lineWidth = 2;
 
-        const drawSlice = (deg, label, color) => {
+        const drawSlice = (deg, labelObj, color) => {
+            const { label, font } = labelObj;
+
             ctx.beginPath();
             ctx.fillStyle = color;
             ctx.moveTo(window.innerWidth / 2, window.innerHeight / 2);
@@ -100,7 +112,7 @@
             ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
             ctx.rotate((deg + sliceDeg / 2) * Math.PI / 180);
             ctx.fillStyle = "white";
-            ctx.font = "16px Arial";
+            ctx.font = font;
             ctx.textAlign = "center";
             const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35; // Inside the outer edge
             const x = Math.sin((deg + sliceDeg / 2) * Math.PI / 180) * radius;
@@ -141,10 +153,10 @@
             // Show the result after 5 seconds (same duration as the wheel spin)
             setTimeout(() => {
                 if (currentChoice) {
-                    result.textContent = `You selected: ${currentChoice}`;
+                    result.textContent = `You selected: ${currentChoice.label}`;
                 }
                 currentChoice = selectedChoice;
-                result.textContent = `You landed on: ${currentChoice}`;
+                result.textContent = `You landed on: ${currentChoice.label}`;
                 spinButton.disabled = false; // Re-enable the button
                 arrow.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotationAngle + 90}deg)`;
             }, 5000);
