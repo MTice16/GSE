@@ -27,13 +27,12 @@
 
         #result {
             position: absolute;
-            top: 10%;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 40px;
             color: red;
             text-align: center;
-            width: 100%;
         }
 
         #spinButton {
@@ -63,6 +62,7 @@
         const canvas = document.getElementById('canvas');
         const result = document.getElementById('result');
         const spinButton = document.getElementById('spinButton');
+        const arrowSize = 30; // Arrow size
 
         const numChoices = 20;
         const choices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
@@ -101,7 +101,7 @@
             drawSlice(i * sliceDeg, choices[i]);
         }
 
-        let selectedChoice = '';
+        let currentChoice = null;
 
         spinButton.addEventListener('click', () => {
             // Disable the button during the animation
@@ -109,7 +109,7 @@
 
             // Generate a random choice (A to T)
             const randomIndex = Math.floor(Math.random() * numChoices);
-            selectedChoice = choices[randomIndex;
+            const selectedChoice = choices[randomIndex];
 
             // Calculate the rotation angle for the wheel
             const rotationAngle = (numChoices - randomIndex) * sliceDeg + 180;
@@ -121,9 +121,11 @@
 
             // Show the result after 5 seconds (same duration as the wheel spin)
             setTimeout(() => {
-                result.textContent = selectedChoice;
-                result.style.fontSize = "100px";
-                result.style.color = "red";
+                if (currentChoice) {
+                    result.textContent = `You selected: ${currentChoice}`;
+                }
+                currentChoice = selectedChoice;
+                result.textContent = `You landed on: ${currentChoice}`;
                 spinButton.disabled = false; // Re-enable the button
             }, 5000);
         });
