@@ -105,19 +105,18 @@
         ctx.lineWidth = 2;
 
         const drawSlice = (deg, choice) => {
-            ctx.save();
-            ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
-            ctx.rotate(deg * Math.PI / 180);
+            ctx.beginPath();
             ctx.fillStyle = choice.color;
-
-            const fontSize = Math.floor(Math.random() * 6) + 15; // Random font size between 15 and 20
-            const fontFamily = "Arial, Impact, Tahoma, Comic Sans MS, Verdana, Georgia, Courier New";
-
-            ctx.font = `${fontSize}px ${fontFamily}`;
-            ctx.textAlign = "center";
-            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
-            ctx.fillText(choice.label, 0, -radius);
-            ctx.restore();
+            ctx.moveTo(window.innerWidth / 2, window.innerHeight / 2);
+            ctx.arc(
+                window.innerWidth / 2, window.innerHeight / 2,
+                Math.min(window.innerWidth, window.innerHeight) * 0.4,
+                deg * Math.PI / 180,
+                (deg + sliceDeg) * Math.PI / 180
+            );
+            ctx.lineTo(window.innerWidth / 2, window.innerHeight / 2);
+            ctx.fill();
+            ctx.stroke();
         };
 
         for (let i = 0; i < numChoices; i++) {
@@ -135,7 +134,7 @@
             const selectedChoice = phoneticAlphabet[randomIndex];
 
             // Calculate the rotation angle for the wheel
-            const rotationAngle = (i * sliceDeg + Math.random() * sliceDeg) + 180;
+            const rotationAngle = (360 / numChoices) * randomIndex + 180;
 
             // Rotate the wheel
             canvas.style.transition = 'none';
