@@ -5,6 +5,7 @@
         body {
             margin: 0;
             overflow: hidden;
+            background-color: #333;
         }
 
         .wheel-container {
@@ -13,7 +14,6 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -62,7 +62,8 @@
         const result = document.getElementById('result');
         const spinButton = document.getElementById('spinButton');
 
-        const numChoices = 20; // Number of choices
+        const numChoices = 20;
+        const choices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
         const sliceDeg = 360 / numChoices;
 
         canvas.width = window.innerWidth;
@@ -95,18 +96,19 @@
         };
 
         for (let i = 0; i < numChoices; i++) {
-            drawSlice(i * sliceDeg, i + 1);
+            drawSlice(i * sliceDeg, choices[i]);
         }
 
         spinButton.addEventListener('click', () => {
             // Disable the button during the animation
             spinButton.disabled = true;
 
-            // Generate a random choice (1 to 20)
-            const randomChoice = Math.floor(Math.random() * numChoices) + 1;
+            // Generate a random choice (A to T)
+            const randomIndex = Math.floor(Math.random() * numChoices);
+            const selectedChoice = choices[randomIndex];
 
             // Calculate the rotation angle for the wheel
-            const rotationAngle = (numChoices - randomChoice) * sliceDeg + 180;
+            const rotationAngle = (numChoices - randomIndex) * sliceDeg + 180;
 
             // Rotate the wheel
             canvas.style.transition = 'none';
@@ -115,7 +117,7 @@
 
             // Show the result after 5 seconds (same duration as the wheel spin)
             setTimeout(() => {
-                result.textContent = `You landed on choice ${randomChoice}`;
+                result.textContent = `You landed on choice ${selectedChoice}`;
                 spinButton.disabled = false; // Re-enable the button
             }, 5000);
         });
