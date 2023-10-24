@@ -66,26 +66,26 @@
 
         const numChoices = 20;
         const babyNames = [
-            { label: 'Aiden' },
-            { label: 'Olivia' },
-            { label: 'Liam' },
-            { label: 'Emma' },
-            { label: 'Noah' },
-            { label: 'Isabella' },
-            { label: 'Sophia' },
-            { label: 'Mia' },
-            { label: 'Charlotte' },
-            { label: 'Amelia' },
-            { label: 'Harper' },
-            { label: 'Evelyn' },
-            { label: 'Abigail' },
-            { label: 'Emily' },
-            { label: 'Elizabeth' },
-            { label: 'Mila' },
-            { label: 'Ella' },
-            { label: 'Avery' },
-            { label: 'Sofia' },
-            { label: 'Aria' }
+            { label: 'Aiden', color: '#3498db' },
+            { label: 'Olivia', color: '#e74c3c' },
+            { label: 'Liam', color: '#27ae60' },
+            { label: 'Emma', color: '#f39c12' },
+            { label: 'Noah', color: '#9b59b6' },
+            { label: 'Isabella', color: '#16a085' },
+            { label: 'Sophia', color: '#d35400' },
+            { label: 'Mia', color: '#8e44ad' },
+            { label: 'Charlotte', color: '#f1c40f' },
+            { label: 'Amelia', color: '#e67e22' },
+            { label: 'Harper', color: '#2ecc71' },
+            { label: 'Evelyn', color: '#e74c3c' },
+            { label: 'Abigail', color: '#1abc9c' },
+            { label: 'Emily', color: '#d35400' },
+            { label: 'Elizabeth', color: '#9b59b6' },
+            { label: 'Mila', color: '#27ae60' },
+            { label: 'Ella', color: '#8e44ad' },
+            { label: 'Avery', color: '#16a085' },
+            { label: 'Sofia', color: '#f39c12' },
+            { label: 'Aria', color: '#3498db' }
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -99,7 +99,7 @@
 
         const drawSlice = (deg, choice) => {
             ctx.beginPath();
-            ctx.fillStyle = "#3498db";
+            ctx.fillStyle = choice.color;
             ctx.moveTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.arc(
                 window.innerWidth / 2, window.innerHeight / 2,
@@ -127,7 +127,7 @@
         };
 
         for (let i = 0; i < numChoices; i++) {
-            drawSlice((i - 5) * sliceDeg, babyNames[i]);
+            drawSlice(i * sliceDeg, babyNames[i]);
         }
 
         let currentChoice = null;
