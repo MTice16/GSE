@@ -18,6 +18,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            transform: rotate(9deg); /* Offset the wheel half a slice clockwise */
         }
 
         #canvas {
@@ -91,7 +92,6 @@
         ];
 
         const sliceDeg = 360 / numChoices;
-        const sliceOffset = sliceDeg / 2; // Offset by half a slice clockwise
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -106,8 +106,8 @@
             ctx.arc(
                 window.innerWidth / 2, window.innerHeight / 2,
                 Math.min(window.innerWidth, window.innerHeight) * 0.4,
-                (deg + sliceOffset) * Math.PI / 180,
-                (deg + sliceOffset + sliceDeg) * Math.PI / 180
+                deg * Math.PI / 180,
+                (deg + sliceDeg) * Math.PI / 180
             );
             ctx.lineTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.fill();
@@ -116,7 +116,7 @@
 
             ctx.save();
             ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
-            ctx.rotate((deg + sliceOffset) * Math.PI / 180);
+            ctx.rotate(deg * Math.PI / 180);
             ctx.fillStyle = "white";
             const fontSize = 16; // Fixed font size
             const fontFamily = "Arial, Impact, Tahoma, Comic Sans MS, Verdana, Georgia, Courier New";
