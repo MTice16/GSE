@@ -5,8 +5,7 @@
         body {
             margin: 0;
             overflow: hidden;
-            background-color: #2C3E50; /* Updated background color */
-            font-family: 'Arial', sans-serif;
+            background-color: #333;
         }
 
         .wheel-container {
@@ -19,14 +18,14 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            transform: rotate(5deg); /* Slight rotation for a unique touch */
+            transform: rotate(1deg); /* Offset the wheel from the choices by -8 degrees */
         }
 
         #canvas {
             position: absolute;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -1; /* Push the graphic behind the text */
         }
 
         #result {
@@ -34,8 +33,8 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 30px; /* Updated font size */
-            color: #E74C3C; /* Changed result color to a unique one */
+            font-size: 40px;
+            color: red;
             text-align: center;
         }
 
@@ -48,8 +47,8 @@
             color: white;
             border: none;
             padding: 10px 20px;
-            border-radius: 25px; /* Rounded corners for a unique button */
-            font-size: 20px; /* Updated font size */
+            border-radius: 5px;
+            font-size: 18px;
             cursor: pointer;
         }
     </style>
@@ -58,7 +57,7 @@
     <div class="wheel-container">
         <canvas id="canvas"></canvas>
         <div id="result"></div>
-        <button id="spinButton">Spin the Unique Wheel</button>
+        <button id="spinButton">GSE Wheel of Pain</button>
         <div id="arrow"></div>
     </div>
 
@@ -69,8 +68,7 @@
         const arrow = document.getElementById('arrow');
 
         const numChoices = 20;
-        let fontSize = 20; // Initial font size
-        const choices = [
+        const babyNames = [
             { label: 'Vandy', color: 'transparent', border: '#000', fontSize: 35  },
             { label: 'Manifest Change', color: 'transparent', border: '#000', fontSize: 30 },
             { label: 'Last minute NDE finding', color: 'transparent', border: '#000', fontSize: 27 },
@@ -113,27 +111,27 @@
             );
             ctx.lineTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.fill();
-            ctx.strokeStyle = choice.border;
-            ctx.stroke();
+            ctx.strokeStyle = choice.border; // Set the border color
+            ctx.stroke(); // Draw the border
 
             ctx.save();
             ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
             ctx.rotate(deg * Math.PI / 180);
             ctx.fillStyle = "white";
-            const fontFamily = 'Arial, sans-serif';
+            const fontSize = 16; // Fixed font size
+            const fontFamily = "Arial, Impact, Tahoma, Comic Sans MS, Verdana, Georgia, Courier New";
             ctx.font = `${fontSize}px ${fontFamily}`;
             ctx.textAlign = "center";
             const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
-            const centerDeg = deg + sliceDeg / 2;
-            const y = -Math.cos(centerDeg * Math.PI / 180) * radius + 10;
+            const y = -Math.cos(sliceDeg * Math.PI / 360) * radius + 10; // Adjusted vertical position
             ctx.translate(0, y);
-            ctx.rotate(-Math.PI / 2);
+            ctx.rotate(-Math.PI / 2); // Rotate text to make it vertical
             ctx.fillText(choice.label, 0, 0);
             ctx.restore();
         };
 
         for (let i = 0; i < numChoices; i++) {
-            drawSlice(i * sliceDeg, choices[i]);
+            drawSlice(i * sliceDeg, babyNames[i]);
         }
 
         let currentChoice = null;
@@ -144,7 +142,7 @@
 
             // Generate a random choice
             const randomIndex = Math.floor(Math.random() * numChoices);
-            const selectedChoice = choices[randomIndex];
+            const selectedChoice = babyNames[randomIndex];
 
             // Calculate the rotation angle for the wheel
             const rotationAngle = (numChoices - randomIndex) * sliceDeg + 180;
@@ -154,9 +152,6 @@
             canvas.style.transform = `rotate(${rotationAngle}deg)`;
             canvas.style.transition = 'transform 5s ease-in-out';
 
-            // Increase the font size
-            fontSize += 5;
-
             // Show the result after 5 seconds (same duration as the wheel spin)
             setTimeout(() => {
                 if (currentChoice) {
@@ -164,8 +159,7 @@
                 }
                 currentChoice = selectedChoice;
                 result.textContent = `You landed on: ${currentChoice.label}`;
-                result.style.fontSize = `${fontSize}px`;
-                spinButton.disabled = false;
+                spinButton.disabled = false; // Re-enable the button
                 arrow.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotationAngle + 90}deg)`;
             }, 5000);
         });
