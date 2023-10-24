@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-    <div class="wheel-container">
+    <div class "wheel-container">
         <canvas id="canvas"></canvas>
     </div>
 
@@ -65,22 +65,22 @@
         const spinButton = document.getElementById('spinButton');
         const arrow = document.getElementById('arrow');
 
-        const numChoices = 14; // Reduced to 14 choices
+        const numChoices = 14;
         const choices = [
-            { label: 'Alpha', font: '16px Arial', color: '#f39c12' },
-            { label: 'Bravo', font: '14px Impact', color: '#e74c3c' },
-            { label: 'Charlie', font: '12px Tahoma', color: '#27ae60' },
-            { label: 'Delta', font: '10px Comic Sans MS', color: '#3498db' },
-            { label: 'Echo', font: '16px Verdana', color: '#9b59b6' },
-            { label: 'Foxtrot', font: '14px Georgia', color: '#34495e' },
-            { label: 'Golf', font: '12px Courier New', color: '#e67e22' },
-            { label: 'Hotel', font: '10px Impact', color: '#d35400' },
-            { label: 'India', font: '16px Tahoma', color: '#2c3e50' },
-            { label: 'Juliett', font: '14px Comic Sans MS', color: '#8e44ad' },
-            { label: 'Kilo', font: '12px Verdana', color: '#1abc9c' },
-            { label: 'Lima', font: '10px Georgia', color: '#16a085' },
-            { label: 'Mike', font: '16px Courier New', color: '#f1c40f' },
-            { label: 'November', font: '14px Arial', color: '#2ecc71' }
+            { label: 'Alpha', color: '#f39c12' },
+            { label: 'Bravo', color: '#e74c3c' },
+            { label: 'Charlie', color: '#27ae60' },
+            { label: 'Delta', color: '#3498db' },
+            { label: 'Echo', color: '#9b59b6' },
+            { label: 'Foxtrot', color: '#34495e' },
+            { label: 'Golf', color: '#e67e22' },
+            { label: 'Hotel', color: '#d35400' },
+            { label: 'India', color: '#2c3e50' },
+            { label: 'Juliett', color: '#8e44ad' },
+            { label: 'Kilo', color: '#1abc9c' },
+            { label: 'Lima', color: '#16a085' },
+            { label: 'Mike', color: '#f1c40f' },
+            { label: 'November', color: '#2ecc71' }
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -92,11 +92,9 @@
         ctx.strokeStyle = "#000";
         ctx.lineWidth = 2;
 
-        const drawSlice = (deg, labelObj) => {
-            const { label, font, color } = labelObj;
-
+        const drawSlice = (deg, choice) => {
             ctx.beginPath();
-            ctx.fillStyle = color;
+            ctx.fillStyle = choice.color;
             ctx.moveTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.arc(
                 window.innerWidth / 2, window.innerHeight / 2,
@@ -107,15 +105,20 @@
             ctx.lineTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.fill();
             ctx.stroke();
+            
             ctx.save();
             ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
             ctx.rotate(deg * Math.PI / 180);
             ctx.fillStyle = "white";
-            ctx.font = font;
+            
+            const fontSize = Math.floor(Math.random() * 6) + 15; // Random font size between 15 and 20
+            const fontFamily = "Arial, Impact, Tahoma, Comic Sans MS, Verdana, Georgia, Courier New";
+            
+            ctx.font = `${fontSize}px ${fontFamily}`;
             ctx.textAlign = "center";
             const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
             const y = -Math.cos(sliceDeg * Math.PI / 360) * radius;
-            ctx.fillText(label, 0, y);
+            ctx.fillText(choice.label, 0, y);
             ctx.restore();
         };
 
