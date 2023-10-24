@@ -68,7 +68,7 @@
     </div>
 
     <div id="result"></div>
-    <button id="spinButton">Spin the dude</button>
+    <button id="spinButton">Spin the Wheel</button>
     <div id="arrow"></div>
 
     <script>
@@ -94,9 +94,9 @@
         ctx.strokeStyle = "#000";
         ctx.lineWidth = 2;
 
-        const drawSlice = (deg, label) => {
+        const drawSlice = (deg, label, color) => {
             ctx.beginPath();
-            ctx.fillStyle = "#f39c12";
+            ctx.fillStyle = color;
             ctx.moveTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.arc(
                 window.innerWidth / 2, window.innerHeight / 2,
@@ -121,8 +121,15 @@
             ctx.restore();
         };
 
+        const colors = [
+            "#f39c12", "#e74c3c", "#27ae60", "#3498db", "#9b59b6", "#34495e",
+            "#e67e22", "#d35400", "#2c3e50", "#8e44ad", "#1abc9c", "#16a085",
+            "#f1c40f", "#e67e22", "#2ecc71", "#27ae60", "#3498db", "#2980b9",
+            "#c0392b", "#8e44ad", "#d35400", "#f39c12", "#e74c3c", "#9b59b6", "#16a085"
+        ];
+
         for (let i = 0; i < numChoices; i++) {
-            drawSlice(i * sliceDeg, phoneticAlphabet[i]);
+            drawSlice(i * sliceDeg, phoneticAlphabet[i], colors[i]);
         }
 
         let currentChoice = null;
