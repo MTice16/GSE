@@ -27,11 +27,13 @@
 
         #result {
             position: absolute;
-            top: 50%;
+            top: 10%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: white;
+            transform: translateX(-50%);
+            font-size: 40px;
+            color: red;
+            text-align: center;
+            width: 100%;
         }
 
         #spinButton {
@@ -99,13 +101,15 @@
             drawSlice(i * sliceDeg, choices[i]);
         }
 
+        let selectedChoice = '';
+
         spinButton.addEventListener('click', () => {
             // Disable the button during the animation
             spinButton.disabled = true;
 
             // Generate a random choice (A to T)
             const randomIndex = Math.floor(Math.random() * numChoices);
-            const selectedChoice = choices[randomIndex];
+            selectedChoice = choices[randomIndex;
 
             // Calculate the rotation angle for the wheel
             const rotationAngle = (numChoices - randomIndex) * sliceDeg + 180;
@@ -117,7 +121,9 @@
 
             // Show the result after 5 seconds (same duration as the wheel spin)
             setTimeout(() => {
-                result.textContent = `You landed on choice ${selectedChoice}`;
+                result.textContent = selectedChoice;
+                result.style.fontSize = "100px";
+                result.style.color = "red";
                 spinButton.disabled = false; // Re-enable the button
             }, 5000);
         });
