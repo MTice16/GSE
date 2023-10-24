@@ -53,11 +53,10 @@
 <body>
     <div class="wheel-container">
         <canvas id="canvas"></canvas>
+        <div id="result"></div>
+        <button id="spinButton">Spin the Wheel</button>
+        <div id="arrow"></div>
     </div>
-
-    <div id="result"></div>
-    <button id="spinButton">Spin the Wheel</button>
-    <div id="arrow"></div>
 
     <script>
         const canvas = document.getElementById('canvas');
@@ -67,11 +66,32 @@
 
         const numChoices = 26;
         const phoneticAlphabet = [
-            { label: 'Alpha', color: 'rgba(243, 156, 18, 0.6)' },
-            { label: 'Bravo', color: 'rgba(231, 76, 60, 0.6)' },
-            { label: 'Charlie', color: 'rgba(39, 174, 96, 0.6)' },
-            { label: 'Delta', color: 'rgba(52, 152, 219, 0.6)' },
-            // ... (the rest of the alphabet)
+            { label: 'Alpha', color: '#f39c12' },
+            { label: 'Bravo', color: '#e74c3c' },
+            { label: 'Charlie', color: '#27ae60' },
+            { label: 'Delta', color: '#3498db' },
+            { label: 'Echo', color: '#9b59b6' },
+            { label: 'Foxtrot', color: '#34495e' },
+            { label: 'Golf', color: '#e67e22' },
+            { label: 'Hotel', color: '#d35400' },
+            { label: 'India', color: '#2c3e50' },
+            { label: 'Juliett', color: '#8e44ad' },
+            { label: 'Kilo', color: '#1abc9c' },
+            { label: 'Lima', color: '#16a085' },
+            { label: 'Mike', color: '#f1c40f' },
+            { label: 'November', color: '#e67e22' },
+            { label: 'Oscar', color: '#2ecc71' },
+            { label: 'Papa', color: '#3498db' },
+            { label: 'Quebec', color: '#9b59b6' },
+            { label: 'Romeo', color: '#34495e' },
+            { label: 'Sierra', color: '#e67e22' },
+            { label: 'Tango', color: '#d35400' },
+            { label: 'Uniform', color: '#2c3e50' },
+            { label: 'Victor', color: '#8e44ad' },
+            { label: 'Whiskey', color: '#1abc9c' },
+            { label: 'X-ray', color: '#16a085' },
+            { label: 'Yankee', color: '#f1c40f' },
+            { label: 'Zulu', color: '#e67e22' }
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -80,7 +100,7 @@
         canvas.height = window.innerHeight;
 
         const ctx = canvas.getContext("2d");
-        ctx.strokeStyle = "transparent";
+        ctx.strokeStyle = "#000";
         ctx.lineWidth = 2;
 
         const drawSlice = (deg, choice) => {
@@ -100,10 +120,8 @@
             ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
             ctx.rotate(deg * Math.PI / 180);
             ctx.fillStyle = "white";
-
             const fontSize = 16; // Fixed font size
             const fontFamily = "Arial, Impact, Tahoma, Comic Sans MS, Verdana, Georgia, Courier New";
-
             ctx.font = `${fontSize}px ${fontFamily}`;
             ctx.textAlign = "center";
             const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
