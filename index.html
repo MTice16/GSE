@@ -21,8 +21,10 @@
         }
 
         #canvas {
+            position: absolute;
             width: 100%;
             height: 100%;
+            z-index: 0; /* Set the z-index to send it to the background */
         }
 
         #result {
@@ -31,8 +33,9 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 40px;
-            color: red;
+            color: white;
             text-align: center;
+            z-index: 1; /* Set the z-index to bring it to the front */
         }
 
         #spinButton {
@@ -47,6 +50,18 @@
             border-radius: 5px;
             font-size: 18px;
             cursor: pointer;
+            z-index: 1; /* Set the z-index to bring it to the front */
+        }
+
+        .choice {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            z-index: 1; /* Set the z-index to bring it to the front */
         }
     </style>
 </head>
@@ -56,6 +71,33 @@
         <div id="result"></div>
         <button id="spinButton">Spin the Wheel</button>
         <div id="arrow"></div>
+        <!-- Choices -->
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(0deg);">Alpha</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(13.846153846153847deg);">Bravo</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(27.692307692307693deg);">Charlie</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(41.53846153846154deg);">Delta</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(55.38461538461539deg);">Echo</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(69.23076923076923deg);">Foxtrot</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(83.07692307692308deg);">Golf</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(96.92307692307692deg);">Hotel</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(110.76923076923077deg);">India</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(124.61538461538461deg);">Juliett</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(138.46153846153845deg);">Kilo</div>
+        <div class "choice" style="transform: translate(-50%, -50%) rotate(152.30769230769232deg);">Lima</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(166.15384615384616deg);">Mike</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(180deg);">November</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(193.84615384615387deg);">Oscar</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(207.6923076923077deg);">Papa</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(221.53846153846155deg);">Quebec</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(235.3846153846154deg);">Romeo</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(249.23076923076923deg);">Sierra</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(263.0769230769231deg);">Tango</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(276.9230769230769deg);">Uniform</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(290.7692307692308deg);">Victor</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(304.61538461538464deg);">Whiskey</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(318.4615384615385deg);">X-ray</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(332.30769230769235deg);">Yankee</div>
+        <div class="choice" style="transform: translate(-50%, -50%) rotate(346.1538461538462deg);">Zulu</div>
     </div>
 
     <script>
@@ -65,35 +107,6 @@
         const arrow = document.getElementById('arrow');
 
         const numChoices = 26;
-        const phoneticAlphabet = [
-            { label: 'Alpha', color: '#f39c12' },
-            { label: 'Bravo', color: '#e74c3c' },
-            { label: 'Charlie', color: '#27ae60' },
-            { label: 'Delta', color: '#3498db' },
-            { label: 'Echo', color: '#9b59b6' },
-            { label: 'Foxtrot', color: '#34495e' },
-            { label: 'Golf', color: '#e67e22' },
-            { label: 'Hotel', color: '#d35400' },
-            { label: 'India', color: '#2c3e50' },
-            { label: 'Juliett', color: '#8e44ad' },
-            { label: 'Kilo', color: '#1abc9c' },
-            { label: 'Lima', color: '#16a085' },
-            { label: 'Mike', color: '#f1c40f' },
-            { label: 'November', color: '#e67e22' },
-            { label: 'Oscar', color: '#2ecc71' },
-            { label: 'Papa', color: '#3498db' },
-            { label: 'Quebec', color: '#9b59b6' },
-            { label: 'Romeo', color: '#34495e' },
-            { label: 'Sierra', color: '#e67e22' },
-            { label: 'Tango', color: '#d35400' },
-            { label: 'Uniform', color: '#2c3e50' },
-            { label: 'Victor', color: '#8e44ad' },
-            { label: 'Whiskey', color: '#1abc9c' },
-            { label: 'X-ray', color: '#16a085' },
-            { label: 'Yankee', color: '#f1c40f' },
-            { label: 'Zulu', color: '#e67e22' }
-        ];
-
         const sliceDeg = 360 / numChoices;
 
         canvas.width = window.innerWidth;
@@ -103,9 +116,9 @@
         ctx.strokeStyle = "#000";
         ctx.lineWidth = 2;
 
-        const drawSlice = (deg, choice) => {
+        const drawSlice = (deg) => {
             ctx.beginPath();
-            ctx.fillStyle = choice.color;
+            ctx.fillStyle = getRandomColor();
             ctx.moveTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.arc(
                 window.innerWidth / 2, window.innerHeight / 2,
@@ -115,25 +128,10 @@
             );
             ctx.lineTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.fill();
-
-            ctx.save();
-            ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
-            ctx.rotate(deg * Math.PI / 180);
-            ctx.fillStyle = "white";
-            const fontSize = 16; // Fixed font size
-            const fontFamily = "Arial, Impact, Tahoma, Comic Sans MS, Verdana, Georgia, Courier New";
-            ctx.font = `${fontSize}px ${fontFamily}`;
-            ctx.textAlign = "center";
-            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
-            const y = -Math.cos(sliceDeg * Math.PI / 360) * radius;
-            ctx.translate(0, y);
-            ctx.rotate(-Math.PI / 2); // Rotate text to make it vertical
-            ctx.fillText(choice.label, 0, 0);
-            ctx.restore();
         };
 
         for (let i = 0; i < numChoices; i++) {
-            drawSlice(i * sliceDeg, phoneticAlphabet[i]);
+            drawSlice(i * sliceDeg);
         }
 
         let currentChoice = null;
@@ -142,9 +140,9 @@
             // Disable the button during the animation
             spinButton.disabled = true;
 
-            // Generate a random choice
+            // Generate a random choice (A to Z)
             const randomIndex = Math.floor(Math.random() * numChoices);
-            const selectedChoice = phoneticAlphabet[randomIndex];
+            const selectedChoice = String.fromCharCode(65 + randomIndex);
 
             // Calculate the rotation angle for the wheel
             const rotationAngle = (numChoices - randomIndex) * sliceDeg + 180;
@@ -157,14 +155,23 @@
             // Show the result after 5 seconds (same duration as the wheel spin)
             setTimeout(() => {
                 if (currentChoice) {
-                    result.textContent = `You selected: ${currentChoice.label}`;
+                    result.textContent = `You selected: ${currentChoice}`;
                 }
                 currentChoice = selectedChoice;
-                result.textContent = `You landed on: ${currentChoice.label}`;
+                result.textContent = `You landed on: ${currentChoice}`;
                 spinButton.disabled = false; // Re-enable the button
                 arrow.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotationAngle + 90}deg)`;
             }, 5000);
         });
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
     </script>
 </body>
 </html>
