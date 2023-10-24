@@ -67,8 +67,20 @@
 
         const numChoices = 14; // Reduced to 14 choices
         const choices = [
-            "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf",
-            "Hotel", "India", "Juliett", "Kilo", "Lima", "Mike", "November"
+            { label: 'Alpha', font: '16px Arial', color: '#f39c12' },
+            { label: 'Bravo', font: '14px Impact', color: '#e74c3c' },
+            { label: 'Charlie', font: '12px Tahoma', color: '#27ae60' },
+            { label: 'Delta', font: '10px Comic Sans MS', color: '#3498db' },
+            { label: 'Echo', font: '16px Verdana', color: '#9b59b6' },
+            { label: 'Foxtrot', font: '14px Georgia', color: '#34495e' },
+            { label: 'Golf', font: '12px Courier New', color: '#e67e22' },
+            { label: 'Hotel', font: '10px Impact', color: '#d35400' },
+            { label: 'India', font: '16px Tahoma', color: '#2c3e50' },
+            { label: 'Juliett', font: '14px Comic Sans MS', color: '#8e44ad' },
+            { label: 'Kilo', font: '12px Verdana', color: '#1abc9c' },
+            { label: 'Lima', font: '10px Georgia', color: '#16a085' },
+            { label: 'Mike', font: '16px Courier New', color: '#f1c40f' },
+            { label: 'November', font: '14px Arial', color: '#2ecc71' }
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -80,7 +92,9 @@
         ctx.strokeStyle = "#000";
         ctx.lineWidth = 2;
 
-        const drawSlice = (deg, label, color) => {
+        const drawSlice = (deg, labelObj) => {
+            const { label, font, color } = labelObj;
+
             ctx.beginPath();
             ctx.fillStyle = color;
             ctx.moveTo(window.innerWidth / 2, window.innerHeight / 2);
@@ -95,24 +109,18 @@
             ctx.stroke();
             ctx.save();
             ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
-            ctx.rotate(deg * Math.PI / 180); // Rotate text horizontally
+            ctx.rotate(deg * Math.PI / 180);
             ctx.fillStyle = "white";
-            ctx.font = 'bold 24px Arial';
+            ctx.font = font;
             ctx.textAlign = "center";
-            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35; // Inside the outer edge
+            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
             const y = -Math.cos(sliceDeg * Math.PI / 360) * radius;
             ctx.fillText(label, 0, y);
             ctx.restore();
         };
 
-        const colors = [
-            "#f39c12", "#e74c3c", "#27ae60", "#3498db", "#9b59b6", "#34495e",
-            "#e67e22", "#d35400", "#2c3e50", "#8e44ad", "#1abc9c", "#16a085",
-            "#f1c40f", "#e67e22", "#2ecc71"
-        ];
-
         for (let i = 0; i < numChoices; i++) {
-            drawSlice(i * sliceDeg, choices[i], colors[i]);
+            drawSlice(i * sliceDeg, choices[i]);
         }
 
         let currentChoice = null;
@@ -136,10 +144,10 @@
             // Show the result after 5 seconds (same duration as the wheel spin)
             setTimeout(() => {
                 if (currentChoice) {
-                    result.textContent = `You selected: ${currentChoice}`;
+                    result.textContent = `You selected: ${currentChoice.label}`;
                 }
                 currentChoice = selectedChoice;
-                result.textContent = `You landed on: ${currentChoice}`;
+                result.textContent = `You landed on: ${currentChoice.label}`;
                 spinButton.disabled = false; // Re-enable the button
                 arrow.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotationAngle + 90}deg)`;
             }, 5000);
