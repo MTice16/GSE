@@ -68,26 +68,26 @@
 
         const numChoices = 20;
         const babyNames = [
-            { label: 'Aiden', color: 'transparent' },
-            { label: 'Olivia', color: 'transparent' },
-            { label: 'Liam', color: 'transparent' },
-            { label: 'Emma', color: 'transparent' },
-            { label: 'Noah', color: 'transparent' },
-            { label: 'Isabella', color: 'transparent' },
-            { label: 'Sophia', color: 'transparent' },
-            { label: 'Mia', color: 'transparent' },
-            { label: 'Charlotte', color: 'transparent' },
-            { label: 'Amelia', color: 'transparent' },
-            { label: 'Harper', color: 'transparent' },
-            { label: 'Evelyn', color: 'transparent' },
-            { label: 'Abigail', color: 'transparent' },
-            { label: 'Emily', color: 'transparent' },
-            { label: 'Elizabeth', color: 'transparent' },
-            { label: 'Mila', color: 'transparent' },
-            { label: 'Ella', color: 'transparent' },
-            { label: 'Avery', color: 'transparent' },
-            { label: 'Sofia', color: 'transparent' },
-            { label: 'Aria', color: 'transparent' }
+            { label: 'Aiden', color: 'transparent', border: '#000' },
+            { label: 'Olivia', color: 'transparent', border: '#000' },
+            { label: 'Liam', color: 'transparent', border: '#000' },
+            { label: 'Emma', color: 'transparent', border: '#000' },
+            { label: 'Noah', color: 'transparent', border: '#000' },
+            { label: 'Isabella', color: 'transparent', border: '#000' },
+            { label: 'Sophia', color: 'transparent', border: '#000' },
+            { label: 'Mia', color: 'transparent', border: '#000' },
+            { label: 'Charlotte', color: 'transparent', border: '#000' },
+            { label: 'Amelia', color: 'transparent', border: '#000' },
+            { label: 'Harper', color: 'transparent', border: '#000' },
+            { label: 'Evelyn', color: 'transparent', border: '#000' },
+            { label: 'Abigail', color: 'transparent', border: '#000' },
+            { label: 'Emily', color: 'transparent', border: '#000' },
+            { label: 'Elizabeth', color: 'transparent', border: '#000' },
+            { label: 'Mila', color: 'transparent', border: '#000' },
+            { label: 'Ella', color: 'transparent', border: '#000' },
+            { label: 'Avery', color: 'transparent', border: '#000' },
+            { label: 'Sofia', color: 'transparent', border: '#000' },
+            { label: 'Aria', color: 'transparent', border: '#000' }
         ];
 
         const sliceDeg = 360 / numChoices;
@@ -96,7 +96,6 @@
         canvas.height = window.innerHeight;
 
         const ctx = canvas.getContext("2d");
-        ctx.strokeStyle = "#000";
         ctx.lineWidth = 2;
 
         const drawSlice = (deg, choice) => {
@@ -111,6 +110,8 @@
             );
             ctx.lineTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.fill();
+            ctx.strokeStyle = choice.border; // Set the border color
+            ctx.stroke(); // Draw the border
 
             ctx.save();
             ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
