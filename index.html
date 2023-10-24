@@ -117,6 +117,23 @@
             ctx.lineTo(window.innerWidth / 2, window.innerHeight / 2);
             ctx.fill();
             ctx.stroke();
+
+            ctx.save();
+            ctx.translate(window.innerWidth / 2, window.innerHeight / 2);
+            ctx.rotate(deg * Math.PI / 180);
+            ctx.fillStyle = "white";
+
+            const fontSize = 16; // Fixed font size
+            const fontFamily = "Arial, Impact, Tahoma, Comic Sans MS, Verdana, Georgia, Courier New";
+
+            ctx.font = `${fontSize}px ${fontFamily}`;
+            ctx.textAlign = "center";
+            const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
+            const y = -Math.cos(sliceDeg * Math.PI / 360) * radius;
+            ctx.translate(0, y);
+            ctx.rotate(-Math.PI / 2); // Rotate text to make it vertical
+            ctx.fillText(choice.label, 0, 0);
+            ctx.restore();
         };
 
         for (let i = 0; i < numChoices; i++) {
@@ -134,7 +151,7 @@
             const selectedChoice = phoneticAlphabet[randomIndex];
 
             // Calculate the rotation angle for the wheel
-            const rotationAngle = (360 / numChoices) * randomIndex + 180;
+            const rotationAngle = (numChoices - randomIndex) * sliceDeg + 180;
 
             // Rotate the wheel
             canvas.style.transition = 'none';
